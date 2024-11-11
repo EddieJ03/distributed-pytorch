@@ -6,6 +6,7 @@ from MyTrainer import MyTrainer
 from MyTrainDataset import MyTrainDataset
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import Dataset, DataLoader
+import time
 
 def load_train_objs():
     train_set = MyTrainDataset(4096)  # load your dataset
@@ -22,14 +23,6 @@ def prepare_dataloader(dataset: Dataset, batch_size: int, distributed: bool):
         shuffle=not distributed,
         sampler=None if not distributed else DistributedSampler(dataset),
     )
-
-
-# In[5]:
-
-
-### SINGLE GPU CODE
-import time
-
 
 # cuda device
 device = 1
